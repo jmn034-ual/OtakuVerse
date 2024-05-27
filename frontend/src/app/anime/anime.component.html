@@ -1,0 +1,10 @@
+<div *ngIf="anime">
+    <h1>{{ anime.attributes.canonicalTitle }}</h1>
+    <img [src]="anime.attributes.posterImage.large" alt="{{ anime.attributes.canonicalTitle }}">
+    <p>{{ anime.attributes.synopsis }}</p>
+    <p><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
+    <p><strong>Start Date:</strong> {{ anime.attributes.startDate }}</p>
+    <p><strong>End Date:</strong> {{ anime.attributes.endDate }}</p>
+    <p><strong>Status:</strong> {{ anime.attributes.status }}</p>
+  </div>
+  

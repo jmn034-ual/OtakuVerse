@@ -1,0 +1,30 @@
+<!-- src/app/components/home/home.component.html -->
+
+<div class="container mx-auto p-5">
+    <header class="text-center mb-10">
+      <h1 class="text-4xl font-bold">OtakuVerse</h1>
+      <p class="text-lg text-gray-600">Explore the world of anime</p>
+    </header>
+  
+    <div class="relative">
+      <!-- Scroll Buttons -->
+      <button (click)="prev()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button (click)="next()" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white rounded-full p-2 z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+  
+      <!-- Anime List -->
+      <div class="flex overflow-x-hidden">
+        <div *ngFor="let anime of animes.slice(currentIndex, currentIndex + 5)" class="flex-shrink-0 w-1/5 p-2">
+          <app-anime [anime]="anime"></app-anime>
+        </div>
+      </div>
+    </div>
+  </div>
+  
