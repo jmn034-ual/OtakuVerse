@@ -1,10 +1,13 @@
-<div *ngIf="anime">
-    <h1>{{ anime.attributes.canonicalTitle }}</h1>
-    <img [src]="anime.attributes.posterImage.large" alt="{{ anime.attributes.canonicalTitle }}">
-    <p>{{ anime.attributes.synopsis }}</p>
-    <p><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
-    <p><strong>Start Date:</strong> {{ anime.attributes.startDate }}</p>
-    <p><strong>End Date:</strong> {{ anime.attributes.endDate }}</p>
-    <p><strong>Status:</strong> {{ anime.attributes.status }}</p>
-  </div>
-  
+<div *ngIf="anime" class="flex overflow-hidden">
+  <button class="anime-button relative bg-gray-100 border border-gray-300 rounded-lg p-4 hover:shadow-lg transition transform hover:scale-105">
+    <h1 class=" text-left truncate font-bold mb-2 ">{{ anime.attributes.canonicalTitle }}</h1>
+    <img [src]="anime.attributes.posterImage.large" alt="{{ anime.attributes.canonicalTitle }}" class="w-full h-auto rounded-lg mb-2">
+    <div class="anime-description absolute bottom-full left-0 right-0 bg-white bg-opacity-90 border border-gray-300 rounded-lg p-4 shadow-lg opacity-0 transform translate-y-2 transition-opacity duration-300">
+      <p>{{ anime.attributes.synopsis }}</p>
+      <p><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
+      <p><strong>Start Date:</strong> {{ anime.attributes.startDate }}</p>
+      <p><strong>End Date:</strong> {{ anime.attributes.endDate }}</p>
+      <p><strong>Status:</strong> {{ anime.attributes.status }}</p>
+    </div>
+  </button>
+</div>

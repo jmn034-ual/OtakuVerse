@@ -20,8 +20,8 @@ export class AnimeService {
     return this.http.get<Anime>(`${this.apiUrl}/${id}`);
   }
 
-  getAnimes(): Observable<Anime[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
+  getAnimes(page : number, size : number): Observable<Anime[]> {
+    return this.http.get<any>(`${this.apiUrl}?page%5Bnumber%5D= ${page}&page%5Bsize%5D= ${size}`).pipe(
       map((response: any) => response.data) // Mapea solo la propiedad 'data' de la respuesta
     );
   }

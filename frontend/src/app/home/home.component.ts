@@ -14,11 +14,17 @@ import { NgFor, NgIf } from '@angular/common';
 export class HomeComponent implements OnInit {
   animes: Anime[] = [] ;
   currentIndex: number = 0;
+  page : number = 1;
+  size : number = 20;
 
   constructor(private animeService: AnimeService) {}
 
   ngOnInit(): void {
-    this.animeService.getAnimes().subscribe(
+    this.getAnimes();
+  }
+
+  getAnimes(): void {
+    this.animeService.getAnimes(this.page, this.size).subscribe(
       (data: Anime[]) => {
         this.animes = data;
       },
@@ -29,6 +35,11 @@ export class HomeComponent implements OnInit {
   next(): void {
     if (this.currentIndex < this.animes.length - 5) {
       this.currentIndex += 5;
+      console.log(this.currentIndex);
+    }else if(this.currentIndex == this.animes.length - 5){
+      this.page += 1;
+      this.getAnimes();
+      this.currentIndex = 0;
     }
   }
 
