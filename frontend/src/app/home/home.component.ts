@@ -3,11 +3,13 @@ import { AnimeService } from '../services/anime.service';
 import { Anime } from '../interfaces/anime';
 import { AnimeComponent } from '../anime/anime.component';
 import { NgFor, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AnimeComponent, NgFor, NgIf],
+  imports: [AnimeComponent, NgFor, NgIf, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -1,14 +1,8 @@
 <div class="w-full h-full p-5">
-  <header class="text-center mb-10">
-    <h1 class="text-4xl font-bold">OtakuVerse</h1>
-    <p class="text-lg text-gray-600">Explore the world of anime</p>
-  </header>
-
   <h2 class="text-2xl font-bold mb-4">Animes</h2>
-
   <div class="relative">
     <!-- Container for scroll buttons and anime list -->
-    <div class="flex items-center space-x-8  bg-slate-200">
+    <div class="flex items-center space-x-8 ">
       <!-- Scroll Button Left -->
       <button (click)="prev()" class="bg-gray-700 text-white rounded-full p-4">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -17,7 +11,7 @@
       </button>
 
       <!-- Anime List -->
-      <div class="flex overflow-x-hidden space-x-4 w-full " style="max-width: calc(100% - 104px);"> <!-- Adjusted width to account for buttons -->
+      <div class="flex overflow-x-hidden space-x-1 w-full p-4" style="max-width: calc(100% - 104px);"> <!-- Adjusted width to account for buttons -->
         <div *ngFor="let anime of animes.slice(currentIndex, currentIndex + 5)" class="flex-shrink-0 w-1/5 p-2">
           <app-anime [anime]="anime"></app-anime>
         </div>

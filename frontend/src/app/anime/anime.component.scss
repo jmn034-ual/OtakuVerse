@@ -1,0 +1,9 @@
+p {
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem; /* 16px */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+}
+
