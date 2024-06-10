@@ -4,6 +4,7 @@ import { OtakuList } from '../../interfaces/OtakuList';
 import { AnimeApi } from '../../interfaces/animeApi';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
+import { iif } from 'rxjs';
 
 @Component({
   selector: 'app-mylist-detail',
@@ -20,6 +21,7 @@ export class MylistDetailComponent implements OnInit{
   listToRename: OtakuList | null = null; 
   initialListName: string = ''; 
   lista: OtakuList | undefined;
+  
   constructor(private animeService: AnimeService,
     private route: ActivatedRoute
   ) { }
@@ -46,5 +48,16 @@ export class MylistDetailComponent implements OnInit{
     }); 
   }
 
+  deleteAnime(anime: AnimeApi): void {
+    if(this.lista){
+      this.lista.animes = this.lista.animes.filter(a => a.id !== anime.id);
+      this.animeService.updateList(this.lista).subscribe({
+        next: () => {
+          this.animes = this.animes.filter(a => a.id !== anime.id);
+        },
+        error: (error) => console.error('Error deleting anime', error)
+      });
+    }
+  }
 
 }

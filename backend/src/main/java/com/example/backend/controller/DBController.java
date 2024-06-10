@@ -32,6 +32,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+/**
+ * Controlador para gestionar operaciones relacionadas con animes, listas de
+ * favoritos y listas de Otaku.
+ */
 @RestController
 @RequestMapping("/data")
 @CrossOrigin(originPatterns = "*", allowCredentials = "true", allowedHeaders = "*")
@@ -46,6 +50,11 @@ public class DBController {
     @Autowired
     private AnimesRepository animeRepository;
 
+    /**
+     * Obtiene todos los animes favoritos.
+     * 
+     * @return una lista de animes favoritos.
+     */
     @GetMapping("/favs")
     public List<Anime> getFavs() {
         List<Anime> animes = new ArrayList<Anime>();
@@ -55,6 +64,12 @@ public class DBController {
         return animes;
     }
 
+    /**
+     * Guarda un anime como favorito.
+     * 
+     * @param animefav el anime a guardar.
+     * @return el anime guardado.
+     */
     @PostMapping("/save")
     public Anime savAnime(@RequestBody Anime animefav) {
         Optional<Anime> existingAnime = animeRepository.findById(animefav.getId());
@@ -68,6 +83,13 @@ public class DBController {
         return animeToSave;
     }
 
+    /**
+     * Elimina un anime favorito por su ID.
+     * 
+     * @param id el ID del anime a eliminar.
+     * @return una respuesta vacía si se elimina correctamente, o una respuesta de
+     *         no encontrado.
+     */
     @DeleteMapping("/deletefav/{id}")
     public ResponseEntity<Void> deleteAnimefav(@PathVariable String id) {
         Optional<Favorito> entity = this.favoritosRepository.findByAnimeId(id);
@@ -79,17 +101,34 @@ public class DBController {
         }
     }
 
+    /**
+     * Crea una nueva lista de Otaku.
+     * 
+     * @param otakuList la lista de Otaku a crear.
+     * @return la lista de Otaku creada.
+     */
     @PostMapping("/createlist")
     public OtakuList postMethodName(@RequestBody OtakuList otakuList) {
         System.out.println(otakuList.getUpDate());
         return this.otakuListRepository.save(otakuList);
     }
 
+    /**
+     * Obtiene todas las listas de Otaku.
+     * 
+     * @return una lista de todas las listas de Otaku.
+     */
     @GetMapping("/getOtakuLists")
     public List<OtakuList> getOtakuLists() {
         return (List<OtakuList>) otakuListRepository.findAll();
     }
 
+    /**
+     * Obtiene una lista de Otaku por su ID.
+     * 
+     * @param id el ID de la lista de Otaku.
+     * @return la lista de Otaku si se encuentra, o una respuesta de no encontrado.
+     */
     @GetMapping("/getOtakuList/{id}")
     public ResponseEntity<OtakuList> getOtakuList(@PathVariable String id) {
         Optional<OtakuList> otakuList = this.otakuListRepository.findById(Long.parseLong(id));
@@ -100,6 +139,13 @@ public class DBController {
         }
     }
 
+    /**
+     * Elimina una lista de Otaku por su ID.
+     * 
+     * @param id el ID de la lista de Otaku a eliminar.
+     * @return una respuesta vacía si se elimina correctamente, o una respuesta de
+     *         no encontrado.
+     */
     @DeleteMapping("/deleteList/{id}")
     public ResponseEntity<Void> deleteOtakuList(@PathVariable String id) {
         Optional<OtakuList> entity = this.otakuListRepository.findById(Long.parseLong(id));
@@ -113,6 +159,13 @@ public class DBController {
         }
     }
 
+    /**
+     * Actualiza una lista de Otaku.
+     * 
+     * @param list la lista de Otaku con la información actualizada.
+     * @return la lista de Otaku actualizada si se encuentra, o una respuesta de no
+     *         encontrado.
+     */
     @PutMapping("updateOtakuList")
     public ResponseEntity<OtakuList> putMethodName(@RequestBody OtakuList list) {
         Optional<OtakuList> otakuList = this.otakuListRepository.findById(list.getId());
@@ -136,6 +189,12 @@ public class DBController {
         }
     }
 
+    /**
+     * Realiza un web scraping de una página específica para obtener información de
+     * premios y ganadores de anime.
+     * 
+     * @return un HashMap con los títulos de premios y sus respectivos ganadores.
+     */
     @GetMapping("/scrapping")
     public HashMap<String, ArrayList<String>> getScrapping() {
         HashMap<String, ArrayList<String>> resultados = new LinkedHashMap<>();
@@ -165,8 +224,7 @@ public class DBController {
                                 resultados.put(awardTitle, new ArrayList<>());
                             }
 
-                            // Agregar el nombre del ganador al ArrayList bajo la clave del título del
-                            // premio
+                            // Agregar el nombre del ganador al ArrayList bajo la clave del título del premio
                             resultados.get(awardTitle).add(animeName);
                         }
                     }

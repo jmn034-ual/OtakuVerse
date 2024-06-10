@@ -14,12 +14,20 @@
   <div class="relative mx-auto bg-opacity-70 p-8 w-3/4 bg-gray-900 rounded-lg">
     <div class="flex justify-between items-start">
       <h1 class="text-4xl font-bold text-white mb-4">{{ anime.attributes.canonicalTitle }}</h1>
-      <div class="flex space-x-4">
+      <div class="flex space-x-4  text-white">
         <button 
-        [ngClass]="{ 'bg-transparent ': !isFavorite, 'bg-orange-500': isFavorite }"
+        [ngClass]="{
+          'border-orange-500 ': !isFavorite,
+          'text-orange-500': isFavorite
+        }"
          (click)="addFav(anime)" 
-         class="text-white border-orange-500 border-2 px-4 py-2 rounded hover:bg-orange-500">Action 1</button>
-        <button (click)="showAddToListModal(anime)" class="bg-green-500 text-white px-4 py-2 rounded">Action 2</button>
+         class="bg-transparent hover:bg-gray-700 hover:text-orange-700 transition-colors duration-300 cursor-pointer p-2 rounded focus:outline-none z-10"
+         >
+         <i class="fas fa-star"></i>
+        </button>
+        <button (click)="showAddToListModal(anime)" class=" text-white px-4 py-2 rounded hover:bg-gray-700">
+          <i class="fas fa-plus"></i>
+        </button>
       </div>
     </div>
     <p class="text-white mb-4"><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
