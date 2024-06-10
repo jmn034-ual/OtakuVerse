@@ -1,0 +1,27 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" (click)="closeModal()">
+    <div class="bg-gray-800 text-white rounded-lg p-8" (click)="$event.stopPropagation()">
+      <h2 class="text-2xl font-bold mb-4">{{ initialListName ? 'Renombrar Otakulist' : 'Crear Otakulist' }}</h2>
+      <label for="listName" class="block text-sm font-medium text-gray-300">Nombre de la Lista</label>
+      <input
+        type="text"
+        id="listName"
+        [(ngModel)]="listName"
+        class="mt-1 block w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+      />
+      <div class="mt-6 flex justify-end space-x-4">
+        <button
+          (click)="createList()"
+          class="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600"
+        >
+          {{ initialListName ? 'RENOMBRAR LISTA' : 'CREAR LISTA' }}
+        </button>
+        <button
+          (click)="closeModal()"
+          class="border border-orange-500 text-orange-500 font-bold py-2 px-4 rounded hover:bg-orange-600 hover:text-white"
+        >
+          CANCELAR
+        </button>
+      </div>
+    </div>
+  </div>
+  

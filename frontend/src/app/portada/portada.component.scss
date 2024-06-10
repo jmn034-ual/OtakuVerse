@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Tailwind CSS classes */
+@layer utilities {
+  .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, transparent, black);
+  }
+}

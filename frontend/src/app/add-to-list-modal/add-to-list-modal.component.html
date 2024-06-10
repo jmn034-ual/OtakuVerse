@@ -1,0 +1,32 @@
+<div *ngIf="anime" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" (click)="closeModal()">
+  <div class="bg-gray-800 text-white rounded-lg p-8 w-1/2 max-w-3xl" (click)="$event.stopPropagation()">
+    <h2 class="text-2xl font-bold mb-4">Añadir a Lista</h2>
+    <p class="mb-4">Selecciona la lista para añadir el anime: {{ anime.attributes.canonicalTitle }}</p>
+    <div class="mb-4">
+      <label for="listSelect" class="block text-sm font-medium text-gray-300">Listas</label>
+      <select id="listSelect" [(ngModel)]="selectedList" class="mt-1 block w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500">
+        <option *ngFor="let list of lists" [ngValue]="list">{{ list.title }}</option>
+      </select>
+    </div>
+    <div class="mt-6 flex justify-between items-center space-x-4">
+      <button (click)="showCreateListModal()" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600">
+        Crear Nueva Lista
+      </button>
+      <div class="flex space-x-4">
+        <button (click)="confirmAdd()" class="bg-orange-500 text-white font-bold py-2 px-4 rounded hover:bg-orange-600">
+          Añadir
+        </button>
+        <button (click)="closeModal()" class="border border-orange-500 text-orange-500 font-bold py-2 px-4 rounded hover:bg-orange-600 hover:text-white">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Modal para crear/renombrar lista -->
+  <app-create-list-modal
+    *ngIf="isCreateListModalVisible"
+    [initialListName]="initialListName"
+    (close)="closeCreateListModal()"
+    (create)="addList($event)"
+  ></app-create-list-modal>
+</div>

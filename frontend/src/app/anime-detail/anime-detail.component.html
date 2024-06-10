@@ -1,19 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hover Example</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="relative group inline-block">
-    <a href="#" class="block p-4 bg-blue-500 text-white">
-      Hover me
-    </a>
-    <div class="absolute inset-0 bg-black bg-opacity-50 hidden group-hover:block">
-        hola
+<div *ngIf="anime" class="h-full w-full relative">
+  <!-- Portada -->
+  <div class="relative w-full h-[600px]">
+    <img *ngIf="anime.attributes.coverImage " 
+      [src]="anime.attributes.coverImage.original"
+      class="h-full w-full object-cover blur-sm opacity-50"
+      alt="Portada"
+    />
+    <div class="absolute inset-0 flex justify-center items-center pt-20">
+      <img [src]="anime.attributes.posterImage.original" alt="{{ anime.attributes.canonicalTitle }}" class="h-[500px] z-40 shadow-2xl shadow-black rounded-xl">
     </div>
   </div>
-</body>
-</html>
+  <!-- Detalles del Anime -->
+  <div class="relative mx-auto bg-opacity-70 p-8 w-3/4 bg-gray-900 rounded-lg">
+    <div class="flex justify-between items-start">
+      <h1 class="text-4xl font-bold text-white mb-4">{{ anime.attributes.canonicalTitle }}</h1>
+      <div class="flex space-x-4">
+        <button 
+        [ngClass]="{ 'bg-transparent ': !isFavorite, 'bg-orange-500': isFavorite }"
+         (click)="addFav(anime)" 
+         class="text-white border-orange-500 border-2 px-4 py-2 rounded hover:bg-orange-500">Action 1</button>
+        <button (click)="showAddToListModal(anime)" class="bg-green-500 text-white px-4 py-2 rounded">Action 2</button>
+      </div>
+    </div>
+    <p class="text-white mb-4"><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
+    <p class="text-white mb-4"><strong>Status:</strong> {{ anime.attributes.status }}</p>
+    <p class="text-white mb-4"><strong>Episodes:</strong> {{ anime.attributes.episodeCount }}</p>
+    <p class="text-white mb-4"><strong>Synopsis:</strong> {{ anime.attributes.synopsis }}</p>
+  </div>
+  <app-add-to-list-modal 
+  *ngIf="isAddToListModalVisible" 
+  [lists]="lists" 
+  [anime]="anime" 
+  (close)="closeAddToListModal()" 
+  (addToList)="handleAddToList($event)">
+  </app-add-to-list-modal>
+</div>

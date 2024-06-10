@@ -1,0 +1,12 @@
+.tab-button {
+    transition: border-color 0.3s ease;
+  }
+  
+  .tab-button.active {
+    border-bottom-color: white;
+  }
+  
+  .tab-button:not(.active):hover {
+    border-bottom-color: gray;
+  }
+  

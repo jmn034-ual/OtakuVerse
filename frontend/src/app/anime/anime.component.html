@@ -1,17 +1,64 @@
-<div *ngIf="anime" class="flex overflow-hidden space-x-4 z-99">
-  <a routerLink="/anime/{{anime.id}}"
-    class="relative bg-gray-100 border border-gray-300 rounded-lg p-4 hover:shadow-lg transition transform hover:scale-105 w-72 flex flex-col items-start overflow-hidden group">
-    <h1 class="text-lg font-bold mb-2 line-clamp-1">{{ anime.attributes.canonicalTitle }}</h1>
-    <img [src]="anime.attributes.posterImage.large" alt="{{ anime.attributes.canonicalTitle }}" class="w-full object-cover rounded-lg mb-2">
+<div *ngIf="anime" class="flex overflow-hidden space-x-4 z-9">
+  <div
+    class="relative rounded-lg p-4 hover:shadow-lg transition transform hover:scale-105 w-72 flex flex-col items-start overflow-hidden group"
+  >
+    <img
+      [src]="anime.attributes.posterImage.original"
+      alt="{{ anime.attributes.canonicalTitle }}"
+      class="w-full object-cover rounded-lg mb-2"
+    />
+    <h1 class="text-lg text-white font-bold mb-2 line-clamp-1">
+      {{ anime.attributes.canonicalTitle }}
+    </h1>
     <div
-      class=" absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300">
-      <div class="bg-slate-400 bg-opacity-90 border border-gray-300 rounded-lg p-4 shadow-lg w-full h-full overflow-hidden space-y-1">
-        <p><strong>{{ anime.attributes.canonicalTitle }}</strong> </p>
-        <p><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
-        <p><strong>{{ anime.attributes.episodeCount }} Episodios</strong> </p>
-        <p><strong>Status:</strong> {{ anime.attributes.status }}</p>
-        <p>{{ anime.attributes.synopsis }}</p>
+      class="absolute rounded-lg inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300"
+    >
+      <div
+        class="bg-[#23252b] text-white bg-opacity-80 rounded-lg p-4 shadow-lg w-full h-full overflow-hidden space-y-1 flex flex-col justify-between"
+      >
+        <a routerLink="/anime/{{ anime.id }}" class="h-full">
+          <div>
+            <p>
+              <strong>{{ anime.attributes.canonicalTitle }}</strong>
+            </p>
+            <p><strong>Rating:</strong> {{ anime.attributes.averageRating }}</p>
+            <p>
+              <strong>{{ anime.attributes.episodeCount }} Episodios</strong>
+            </p>
+            <p><strong>Status:</strong> {{ anime.attributes.status }}</p>
+            <p>{{ anime.attributes.synopsis }}</p>
+          </div>
+        </a>
+        <div class="flex justify-end items-center mt-4 z-99  w-full">
+          <button
+              [ngClass]="{
+                'border-orange-500 ': !isFavorite,
+                'text-orange-500': isFavorite
+              }"
+              (click)="addFav(anime)"
+              class="bg-transparent hover:text-orange-700 transition-colors duration-300 cursor-pointer p-2 rounded focus:outline-none z-10"
+          >
+              <i class="fas fa-star"></i>
+              <!-- Aquí puedes usar cualquier icono de Font Awesome -->
+          </button>
+      
+          <button
+              (click)="showAddToListModal(anime)"
+              class="bg-transparent hover:text-orange-700 transition-colors duration-300 cursor-pointer p-2 rounded focus:outline-none z-10"
+          >
+              <i class="fas fa-plus"></i>
+          </button>
+      </div>
+      
       </div>
     </div>
-  </a>
+  </div>
+  <app-add-to-list-modal
+    *ngIf="isAddToListModalVisible"
+    [lists]="lists"
+    [anime]="anime"
+    (close)="closeAddToListModal()"
+    (addToList)="handleAddToList($event)"
+  >
+  </app-add-to-list-modal>
 </div>

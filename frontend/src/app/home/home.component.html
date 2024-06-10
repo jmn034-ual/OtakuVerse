@@ -1,24 +1,31 @@
-<div class="w-full h-full p-5">
-  <h2 class="text-2xl font-bold mb-4">Animes</h2>
-  <div class="relative">
+<div class="w-full h-full bg-transparent pt-0">
+  <!-- Portada -->
+  <div class="w-full">
+    <app-portada></app-portada>
+  </div>
+  <div class="relative p-5">
+    <div class="flex justify-between items-center mb-4 text-white">
+      <h2 class="text-2xl font-bold pl-9">Animes</h2>
+      <a routerLink="list/all" class="text-l text-slate-700 font-bold pr-6 hover:text-white">View All</a>
+    </div>
     <!-- Container for scroll buttons and anime list -->
-    <div class="flex items-center space-x-8 ">
+    <div class="flex items-center space-x-8">
       <!-- Scroll Button Left -->
-      <button (click)="prev()" class="bg-gray-700 text-white rounded-full p-4">
+      <button *ngIf="disabled" (click)="prev()" class="text-white p-4">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
 
       <!-- Anime List -->
-      <div class="flex overflow-x-hidden space-x-1 w-full p-4" style="max-width: calc(100% - 104px);"> <!-- Adjusted width to account for buttons -->
+      <div class="flex overflow-x-hidden space-x-1 w-full p-4" style="max-width: calc(100% - 104px);">
         <div *ngFor="let anime of animes.slice(currentIndex, currentIndex + 5)" class="flex-shrink-0 w-1/5 p-2">
           <app-anime [anime]="anime"></app-anime>
         </div>
       </div>
 
       <!-- Scroll Button Right -->
-      <button (click)="next()" class="bg-gray-700 text-white rounded-full p-4">
+      <button (click)="next()" class="text-white p-4">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>

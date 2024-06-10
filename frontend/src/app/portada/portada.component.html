@@ -1,0 +1,15 @@
+<div *ngIf="animeWinners.length > 0" class="w-full h-full">
+  <!-- Portada -->
+  <div class="relative w-full h-[700px] bg-cover bg-center position-relative">
+    <img [src]="animeWinners[currentWinnerIndex].attributes.coverImage.original" class="absolute inset-0 w-full h-full object-cover" alt="Portada"> 
+    <!-- Degradado de arriba hacia abajo -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black to-black"></div>
+    <!-- Degradado de derecha a izquierda -->
+    <div class="absolute inset-0 right-0 w-1/4 h-full bg-gradient-to-l from-transparent via-black/70 to-black"></div>
+    <div class="absolute left-10 bottom-16 text-white w-1/4">
+      <h1 class="text-4xl font-bold">{{ animeWinners[currentWinnerIndex].attributes.canonicalTitle }}</h1>
+      <p class="text-lg mt-2 line-clamp-6">{{ animeWinners[currentWinnerIndex].attributes.synopsis }}</p>
+      <button routerLink="/anime/{{animeWinners[currentWinnerIndex].id}}" class="mt-4 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-800">Read more</button>
+    </div>
+  </div>
+</div>

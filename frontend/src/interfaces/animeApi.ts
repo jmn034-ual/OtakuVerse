@@ -1,6 +1,6 @@
 // src/app/models/anime.model.ts
 
-export interface Anime {
+export interface AnimeApi {
       id: string;
       type: string;
       links: {

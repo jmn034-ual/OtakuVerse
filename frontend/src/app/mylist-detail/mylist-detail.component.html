@@ -1,0 +1,27 @@
+<div *ngIf="lista" class="flex flex-col items-center w-full min-h-screen pt-32 pb-4">
+    <div class="flex w-full justify-center items-center px-4">
+      <h1 class="text-2xl text-white font-bold mb-2">{{lista.title | uppercase}}</h1>
+    </div>
+    
+    <hr class="w-full border-t border-gray-500 mb-4">
+    
+    <div class="grid grid-cols-5 gap-1">
+      <div *ngFor="let anime of animes" class="flex flex-col items-center">
+        <div class="h-80 w-72 flex flex-col items-center hover:shadow-lg transition transform hover:scale-105">
+          <a
+              routerLink="/anime/{{ anime.id }}"
+              class="text-lg text-white font-bold block truncate"
+              >
+              <img [src]="anime.attributes.posterImage.original" alt="{{ anime.attributes.canonicalTitle }}" class="h-[250px] w-[200px] rounded-lg mb-2">
+            </a>
+          <a
+              routerLink="/anime/{{ anime.id }}"
+              class="text-base text-white font-bold block truncate w-[200px] text-center"
+              >
+              {{ anime.attributes.canonicalTitle }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
